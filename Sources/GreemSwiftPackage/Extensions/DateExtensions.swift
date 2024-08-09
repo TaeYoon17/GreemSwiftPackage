@@ -49,11 +49,21 @@ public extension Date {
         return startDate ? Calendar.current.startOfDay(for: calendarDate) : calendarDate
     }
     
-    /// 해당 날짜가 다른 날짜와 같은지 출력
+    /// 해당 날짜가 다른 날짜와 특정 데이트 타입이 같은 지 출력
+    /// 불리언 값
     func isSameDate(other:Date,checkType: Set<Calendar.Component>) -> Bool{
         let left = Calendar.current.dateComponents(checkType, from: self)
         let right = Calendar.current.dateComponents(checkType, from: other)
         return Calendar.current.date(other, matchesComponents: left)
+    }
+    
+    /// 날짜를 영문 포맷으로 변환
+    func formatDateToString() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .long
+        dateFormatter.timeStyle = .none
+        dateFormatter.locale = Locale(identifier: "en_US")
+        return dateFormatter.string(from: self)
     }
 }
 extension Date.DayOfWeekOutputType{
